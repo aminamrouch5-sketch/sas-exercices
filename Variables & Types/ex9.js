@@ -5,5 +5,5 @@ const x1 = Number(prompt("enter the x1 value : "));
 const x2 = Number(prompt("enter the x2 value : "));
 
 
-let Distance = Math.sqrt((x*2-x*1)**2+(y*2-y*1)**2+(z*2-z*1)**2);
+let Distance = Math.sqrt((x2-x1)**2+(y2-y1)**2+(z2-z1)**2);
 console.log(`Distance : ${Distance}`)
