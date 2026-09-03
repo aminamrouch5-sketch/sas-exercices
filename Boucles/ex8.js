@@ -1,12 +1,11 @@
-var prompt = require('prompt-sync')();
-
-let n = Number(prompt("Entrez le nombre de termes :"));
+const prompt = require('prompt-sync')();
+const num = Number(prompt('Donner moi un nombre : '));
 
 let a = 0;
 let b = 1;
 
-for (let i = 0; i < n; i++) {
-    console.log(a);
+for (let i = 0; i <= num; i++) {
+    console.log(`F(${i}) = ${a}`);
 
     let next = a + b;
     a = b;
