@@ -1,7 +1,7 @@
 var prompt = require('prompt-sync')();
 const year = prompt("combien d'anné tu peux changé ? : ")
 const choice = prompt("insert the choice sois seconds , hours , days , months : ")
-let sum;
+let sum=0;
 switch (choice){
     case choice=="months":
         sum = year * 365 / 12
