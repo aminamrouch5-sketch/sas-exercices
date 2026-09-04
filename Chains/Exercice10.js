@@ -14,21 +14,20 @@ for (i in substring){
 }
 
 for (let i=0;i<=len-1;i++)
-    {
-
-    for (let j=0;j<=sublen-1;j++){
-        if (index==sublen){
+{
+    if (index==sublen)
+        {
             break
         }else{
-            if (substring[j]==word[i]){
-                existe += substring[j]
-                index++
-            }else {    
-                existe="";
-                index = 0    
-            }
+    for(k=0;k<=0;k++){
+        if (word[i]==substring[k]){
+            existe+=`${substring[k]}`
+            index++
+            break
+        }else {
+            existe ="";
+            index = 0;
         }
-    
     }
-    }
-console.log(existe)
+    console.log(existe)
+}}
