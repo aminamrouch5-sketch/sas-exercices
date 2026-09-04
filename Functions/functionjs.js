@@ -19,7 +19,7 @@ const Calculatrice =  {Somme:
                         let result = x / y;
                         console.log(`${x} / ${y} = ${result}`)
                       }}
-                    var start = "true"
+                    var start = true
         while (start){
             try{
         console.log('Press any key pour exité ')
