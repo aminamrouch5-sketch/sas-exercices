@@ -1,33 +1,40 @@
-const prompt = require('prompt-sync')();
-let word = prompt('entré ton word : ');
-let substring = prompt('entré substring : ')
-let existe = "";
-let len = 0 ;
-let sublen = 0 ;
-let index =0;
-for (i in word){
-    len++
-    }
+var prompt = require('prompt-sync')();
+const phrase = prompt('write the phrase : ');
+const substring = prompt('write the substring : ');
 
-for (i in substring){
-    sublen++
+let len1 = len(phrase);
+let len2 = len(substring);
+
+
+sub(len1, len2, phrase, substring);
+
+function len(x){
+    let l = 0;
+    let string="";
+    for(i in x){
+        l++;
+    }
+    return l;
 }
 
-for (let i=0;i<=len-1;i++)
-{
-    if (index==sublen)
-        {
+function sub(len1, len2, word, word2){
+    let isFound = false;
+
+    for(let i = 0; i <= len1 - len2; i++){
+        let match = true;
+        for(let j=0;j<len2;j++){
+        if(word[i+j]==!word[j]){
+            match = false;
             break
-        }else{
-    for(k=0;k<=0;k++){
-        if (word[i]==substring[k]){
-            existe+=`${substring[k]}`
-            index++
-            break
-        }else {
-            existe ="";
-            index = 0;
         }
+        }if (match){
+        isFound=true;
+        break
     }
-    console.log(existe)
-}}
+    }
+    if (isFound){
+        console.log("Yes it's There ")
+    } else{
+        console.log(" it's not There ")
+    }
+}
