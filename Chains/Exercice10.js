@@ -16,25 +16,32 @@ function len(x){
     }
     return l;
 }
-
-function sub(len1, len2, word, word2){
+function sub(len1,len2,phrase,substring){
     let isFound = false;
+    for(let i=0;i<=len1;i++){
 
-    for(let i = 0; i <= len1 - len2; i++){
         let match = true;
-        for(let j=0;j<len2;j++){
-        if(word[i+j]==!word[j]){
-            match = false;
-            break
+
+        for(let j=0;j<=len2;j++){
+
+            if(phrase[i+j]!==substring[j]){
+                let match = false;
+                break
+            }
+            
         }
-        }if (match){
-        isFound=true;
-        break
-    }
+        
+        if (match){
+                isFound = true;
+                break
+            }
+
     }
     if (isFound){
-        console.log("Yes it's There ")
-    } else{
-        console.log(" it's not There ")
+        console.log("its there ")
     }
+    else{
+        console.log("it's not there ")
+    }
+    
 }
