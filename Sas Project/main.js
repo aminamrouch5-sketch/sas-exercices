@@ -1,4 +1,5 @@
 const { trips } = require('./Trajets.js')
+const { places } = require('./Trajets.js')
 var prompt = require('prompt-sync')();
 const tickets = [];
 let ticket_id = 0;
@@ -37,11 +38,13 @@ const Manage = {
             if (trip==i.id){
                 if(i.availableSeats>0){
                     if(DisponsibleIDs.length>0){
+                        places[trip].place++
                         tickets[DisponsibleIDs[0]]={"id":DisponsibleIDs[0],
                                     "passengerName":name,
                                     "tripId":trip,
                                     "seatNumber":1,
-                                    "price":i.price
+                                    "price":i.price,
+                                    "place":places[trip].place
                                 }
                                 console.log("===================TICKET SERSI VALIDIE=================")
                             console.log(
@@ -51,19 +54,24 @@ const Manage = {
                     | Seat Number    : ${tickets[DisponsibleIDs[0]].seatNumber}       
                     | Price          : ${tickets[DisponsibleIDs[0]].price}      
                     | tripID         : ${tickets[DisponsibleIDs[0]].tripId}            
-
+                    | Depart         : ${trips[tickets[DisponsibleIDs[0]].tripId].departure}
+                    | Destination    : ${trips[tickets[DisponsibleIDs[0]].tripId].destination}
+                    | Place          : ${tickets[DisponsibleIDs[0]].place}
+        
                      ______________________________________________________________`)
                     delete DisponsibleIDs[0]
-                    index--
+                    index-- // ${trips[tickets[DisponsibleIDs[0]].tripId].destination}
 
                 }
                 else
-                {
+                {                                     //trip means the id user insert in case the id is existe it will take the value of trip
+                      places[trip].place++
                       tickets[ticket_id]={"id":ticket_id,
                                 "passengerName":name,
                                 "tripId":trip,
                                 "seatNumber":1,
-                                "price":i.price
+                                "price":i.price,
+                                "place":places[trip].place
                                }
                         console.log("===================TICKET SERSI VALIDIE=================")
                             console.log(
@@ -73,6 +81,9 @@ const Manage = {
                     | Seat Number    : ${tickets[ticket_id].seatNumber}       
                     | Price          : ${tickets[ticket_id].price}      
                     | tripID         : ${tickets[ticket_id].tripId}            
+                    | Depart         : ${trips[tickets[ticket_id].tripId].departure}
+                    | DepartureTime  : ${trips[tickets[ticket_id].tripId].destination}
+                    |  Place         : ${tickets[ticket_id].place}
 
                      ______________________________________________________________`)
 
@@ -102,7 +113,12 @@ AfficherTicket:function(){
     |  Passenger Name : ${tickets[i].passengerName}
     |  Seat Number    : ${tickets[i].seatNumber}
     |  Trip ID        : ${tickets[i].tripId }
-    |  Price          : ${tickets[i].price}   `)
+    |  Price          : ${tickets[i].price}
+    |  Depart         : ${tickets[i].departure}
+    |  Destination    : ${tickets[i].destination}
+    |  Place          : ${tickets[i].place}
+    
+       `)
     
     }
 },
@@ -114,11 +130,13 @@ Annule:function(){
         for ( i in tickets){
             if (TicketID==tickets[i].id){
                 console.log(`===========Le billet a été supprimé avec succès=============`)
+                places[tickets[i].tripId].place--
                 delete tickets[i];
                 DisponsibleIDs[index]=TicketID
                 isFound = true;
                 index++;
-                break;
+                
+                               break;
             }
             else {
                 isFound=false;
@@ -154,9 +172,9 @@ Annule:function(){
 
 
 let start =true;
-console.log("===============================S=====")
-console.log("= RAILWAY MANAGER V1               =")
-console.log("====================================")
+console.log("=====================================")
+console.log("= RAILWAY MANAGER V1                =")
+console.log("=====================================")
 console.log(`
 1. Afficher les trajets 
 2. Acheter un ticket 
@@ -187,6 +205,7 @@ switch(choice){
         break;
 
     case "5":
+
 
     case "6":
 
