@@ -180,3 +180,24 @@ export const trips = [
         availableSeats: 50
     }
 ];
+export const places = [
+{"TripID":1,"place":0},
+{"TripID":2,"place":0},
+{"TripID":3,"place":0},
+{"TripID":4,"place":0},
+{"TripID":5,"place":0},
+{"TripID":6,"place":0},
+{"TripID":7,"place":0},
+{"TripID":8,"place":0},
+{"TripID":9,"place":0},
+{"TripID":10,"place":0},
+{"TripID":11,"place":0},
+{"TripID":12,"place":0},
+{"TripID":13,"place":0},
+{"TripID":14,"place":0},
+{"TripID":15,"place":0},
+{"TripID":16,"place":0},
+{"TripID":17,"place":0},
+{"TripID":18,"place":0},
+{"TripID":19,"place":0},
+{"TripID":20,"place":0}]
