@@ -81,27 +81,42 @@ const tickets = [{
     "price": 100,
     "place": 1
   }];
-let ticket_id = 11;
+let ticket_id = 10;
 const DeletedIDs = [];
-let chiffre_affaire =870;
+let chiffre_affaire =0;
 let TicketNumber =10;
 let index=0;
 
+
+
+
+
+
+
+
+                                                        // Analyze Function For Caluclate the already of Tickets Number and Update Trips Places 
 function Analyze(){
     for(i in tickets){
         for(let j=0;j<trips.length;j++){
-        if (tickets[i].tripId==trips[j].id){
+            if (tickets[i].tripId==trips[j].id){
             trips[i].availableSeats--
+            }
+        }
+    }
+    for (i in tickets){
+        for(let j=0;j<trips.length;j++){
+            if(tickets[i].tripId==trips[j].id){
+                chiffre_affaire+=tickets[i].price
+            }
         }
     }
 }
-}
 Analyze()
-// Functions Object : this objects has all functions will app to work
+// Functions Object : this objects contains all Functions of Showing Manupilation Data... | THE ENGINE OF PROJECT
 const Manage = {
     Afficher:function(){
         console.log("===============TRAJECTS DISPONSIBLE===============\n\n")
-        for(let i=0; i<trips.length;i++){
+        for(let i=0; i<trips.length;i++){                                           // loops into all trips objects and show all data of trips
             if (trips[i].availableSeats>0){
         console.log('=======================================================================')
         console.log(`|  #${trips[i].id} | departure : ${trips[i].departure} | destination : ${trips[i].destination}`)
@@ -111,8 +126,8 @@ const Manage = {
       }
     }
 },Achetter:function(){
-        function AddNew(){
-            places[i].place++                                    //trip means the id user insert in case the id is existe it will take the value of trip
+        function AddNew(){                                                                                  // Add new Ticket Function 
+            places[i].place++                                   
                       tickets[ticket_id]={"id":ticket_id+1,
                                 "passengerName":name,
                                 "tripId":trip,
@@ -136,16 +151,20 @@ const Manage = {
 ______________________________________________________________`)
                  chiffre_affaire+=tickets[ticket_id].price
                  ticket_id++
-                 TicketNumber++
+                 TicketNumber++                                                                         
                 
         }
+
+
+
+
+
         let name = prompt("entré ton nom : ")
         // NAME INPUT VALIDATION
-        if (name.length>8 || name.length<=3){
+        if (name.length>15 || name.length<=7){
            return console.log('insert valid nom ')
             
         }
-        let seat = 1;
         let trip = parseInt(prompt("donne lid de trip : "))
         // IF TRIP INPUT IS NOT NUMBER WITH NUMBER FUNCTION WE SURE THAT IF USER NOT ENTRED NUMBER THE VAR WILL EQUALE "NaN"
         if (!isNaN(trip)){
@@ -175,7 +194,7 @@ ______________________________________________________________`)
                     | Destination    : ${trips[i].destination}
                     | Place          : ${tickets[ticket_id].place}
         
-                     ______________________________________________________________`)
+______________________________________________________________`)
         
                       DeletedIDs.splice(i,1)
                     index-- // ${trips[tickets[DisponsibleIDs[0]].tripId].destination}
@@ -185,10 +204,14 @@ ______________________________________________________________`)
                     break
                 }
             }
+                            // => If The Loops Dosent trip.id is not equal of any deleted ids list it will Lunch the Function AddNew()
+        }
+        else{
+            AddNew()      // =>  If The DeletedLists Length is Less then 1 it will auto function AddNew
         }
     }
         else    {
-                    console.log('No aviable Places')
+                    console.log('==============Pardon No Places aviable ...================')
 
                 }
           
@@ -261,7 +284,7 @@ Recherche:function(){
     if (!isNaN(order)){
         if (order==0){
             let name = prompt("Write the name : ").toUpperCase()
-            if (name.length>3 && name.length<8){
+            if (name.length>5 && name.length<15){
             for (i=0;i<tickets.length;i++){
                 if (tickets[i].passengerName.toUpperCase()==name){
                     isFound=true;
@@ -326,6 +349,8 @@ Recherche:function(){
                     console.log('==========insert valid id ...===========')
                 }
             }
+        }else{
+                console.log("=========Insert Valid Data ci teux plus ===========") 
         }
 
     },
@@ -385,33 +410,36 @@ Recherche:function(){
     
     },
     Static:function(){
+        let temps = [];
         let VilleTicket = {}
         function Calc(){
-            let temps = []
+            
             let tmp = 0;
             for (i in trips){
-                temps[i]={"TicketsVendu":trips[i].availableSeats-50,"ville":trips[i].departure}
+                temps[i]={"TicketsVendu":50-(trips[i].availableSeats),"ville":trips[i].departure}
             }
             for (let i=0;i<temps.length;i++){
                 for(let j=0;j<temps.length-1;j++){
-                    if (temps[j].TicketsVendu<temps[j+1]){
+                    if (temps[j].TicketsVendu<temps[j+1].TicketsVendu){
                         tmp = temps[j]
                         temps[j]=temps[j+1]
                         temps[j+1]=tmp
                     }
+                    
                 }
+                
             }
             
         }
+        Calc()
 
 
-        
         console.log('=========================================================')
         console.log('========          STATISTIQUE                ============')
         console.log(`|
-| Chiffre D'Affaire : ${chiffre_affaire}
+| Chiffre D'Affaire : ${chiffre_affaire} DH
 | Ticket Vendu      : ${TicketNumber}
-| Le Mielluer Ville : ${temps.ville} | Tickets ${temps.availableSeats}
+| Le Mielluer Ville : ${temps[0].ville} | Tickets ${temps[0].TicketsVendu}
 | 
 `)
     }
@@ -447,12 +475,13 @@ console.log(`
 6. Filtrer les trajets                                                         =
 7. Trier les trajets                                                           =
 8. Assiste moi                                                                 =
+9. Statique                                                                    =
 0. Quitter                                                                     =
 ================================================================================`)
 while (start){
-console.log(DeletedIDs)
 let choice = prompt('Vote Choix : ')
-console.log(ticket_id)
+
+
 switch(choice){
     case "0":
             start = false;
@@ -491,15 +520,14 @@ switch(choice){
 5. Rechercher un ticket 
 6. Filtrer les trajets 
 7. Trier les trajets
-8. Assiste moi 
+8. Assiste moi
+9. Statique  
 0. Quitter`)
     break;
     case "9":
         Manage.Static()
+    break;
     default:
         console.log('insert un valid choice ...')
         break;
         }}
-
-
-
