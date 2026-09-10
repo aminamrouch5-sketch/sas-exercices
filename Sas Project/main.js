@@ -1,15 +1,102 @@
 const { trips } = require('./Trajets.js')
 const { places } = require('./Trajets.js')
 var prompt = require('prompt-sync')();
-const tickets = [];
-let ticket_id = 0;
-let DisponsibleIDs=[];
-let chiffre_affaire =0;
+const tickets = [{
+    "id": 1,
+    "passengerName": "Youssef Alami",
+    "tripId": 3,
+    "seatNumber": 1,
+    "price": 140,
+    "place": 1
+  },
+  {
+    "id": 2,
+    "passengerName": "Fatima Zahra",
+    "tripId": 12,
+    "seatNumber": 1,
+    "price": 85,
+    "place": 1
+  },
+  {
+    "id": 3,
+    "passengerName": "Mehdi Benjelloun",
+    "tripId": 7,
+    "seatNumber": 1,
+    "price": 150,
+    "place": 1
+  },
+  {
+    "id": 4,
+    "passengerName": "Amina Tazi",
+    "tripId": 2,
+    "seatNumber": 1,
+    "price": 90,
+    "place": 1
+  },
+  {
+    "id": 5,
+    "passengerName": "Hamza El Fassi",
+    "tripId": 18,
+    "seatNumber": 1,
+    "price": 60,
+    "place": 1
+  },
+  {
+    "id": 6,
+    "passengerName": "Khadija Chraibi",
+    "tripId": 5,
+    "seatNumber": 1,
+    "price": 110,
+    "place": 1
+  },
+  {
+    "id": 7,
+    "passengerName": "Omar Kettani",
+    "tripId": 10,
+    "seatNumber": 1,
+    "price": 30,
+    "place": 1
+  },
+  {
+    "id": 8,
+    "passengerName": "Salma Bennani",
+    "tripId": 15,
+    "seatNumber": 1,
+    "price": 80,
+    "place": 1
+  },
+  {
+    "id": 9,
+    "passengerName": "Anas Berrada",
+    "tripId": 1,
+    "seatNumber": 1,
+    "price": 25,
+    "place": 1
+  },
+  {
+    "id": 10,
+    "passengerName": "Zineb Idrissi",
+    "tripId": 19,
+    "seatNumber": 1,
+    "price": 100,
+    "place": 1
+  }];
+let ticket_id = 11;
+const DeletedIDs = [];
+let chiffre_affaire =870;
+let TicketNumber =10;
 let index=0;
 
-
-
-
+function Analyze(){
+    for(i in tickets){
+        for(let j=0;j<trips.length;j++){
+        if (tickets[i].tripId==trips[j].id){
+            trips[i].availableSeats--
+        }
+    }
+}
+}
+Analyze()
 // Functions Object : this objects has all functions will app to work
 const Manage = {
     Afficher:function(){
@@ -24,50 +111,8 @@ const Manage = {
       }
     }
 },Achetter:function(){
-        let name = prompt("entré ton nom : ")
-        // NAME INPUT VALIDATION
-        if (name.length>8 || name.length<=3){
-           return console.log('insert valid nom ')
-            
-        }
-        let seat = 1;
-        let trip = parseInt(prompt("donne lid de trip : "))
-        // IF TRIP INPUT IS NOT NUMBER WITH NUMBER FUNCTION WE SURE THAT IF USER NOT ENTRED NUMBER THE VAR WILL EQUALE "NaN"
-        if (!isNaN(trip)){
-            for (i in trips){
-            if (trip==trips[i].id){
-                console.log(1)
-                if(trips[i].availableSeats>0){
-                    if(DisponsibleIDs.length>0){
-
-                        tickets[DisponsibleIDs[0]-1]={"id":DisponsibleIDs[0],
-                                    "passengerName":name,
-                                    "tripId":trip,
-                                    "seatNumber":1,
-                                    "price":trips[i].price,
-                                    "place":DisponsibleIDs[0]
-                                };
-                        trips[i].availableSeats--
-                                console.log("===================TICKET SERSI VALIDIE=================")
-                            console.log(
-                    `
-                    | TICKET #${tickets[DisponsibleIDs[0]-1].id}                                 
-                    | Passenger Name : ${tickets[DisponsibleIDs[0]-1].passengerName}                  
-                    | Seat Number    : ${tickets[DisponsibleIDs[0]-1].seatNumber}       
-                    | Price          : ${tickets[DisponsibleIDs[0]-1].price}      
-                    | tripID         : ${tickets[DisponsibleIDs[0]-1].tripId}            
-                    | Depart         : ${trips[i].departure}
-                    | Destination    : ${trips[i].destination}
-                    | Place          : ${tickets[DisponsibleIDs[0]-1].place}
-        
-                     ______________________________________________________________`)
-                    delete DisponsibleIDs[0]
-                    index-- // ${trips[tickets[DisponsibleIDs[0]].tripId].destination}
-
-                }
-                else
-                {                                     //trip means the id user insert in case the id is existe it will take the value of trip
-                      places[i].place++
+        function AddNew(){
+            places[i].place++                                    //trip means the id user insert in case the id is existe it will take the value of trip
                       tickets[ticket_id]={"id":ticket_id+1,
                                 "passengerName":name,
                                 "tripId":trip,
@@ -89,12 +134,61 @@ const Manage = {
                     |  Place         : ${tickets[ticket_id].place}
 
 ______________________________________________________________`)
-
+                 chiffre_affaire+=tickets[ticket_id].price
                  ticket_id++
-                break
+                 TicketNumber++
+                
+        }
+        let name = prompt("entré ton nom : ")
+        // NAME INPUT VALIDATION
+        if (name.length>8 || name.length<=3){
+           return console.log('insert valid nom ')
+            
+        }
+        let seat = 1;
+        let trip = parseInt(prompt("donne lid de trip : "))
+        // IF TRIP INPUT IS NOT NUMBER WITH NUMBER FUNCTION WE SURE THAT IF USER NOT ENTRED NUMBER THE VAR WILL EQUALE "NaN"
+        if (!isNaN(trip)){
+            for (i in trips){
+            if (trip==trips[i].id){
+                if(trips[i].availableSeats>0){
+                    if(DeletedIDs.length>0){
+                        for (i in DeletedIDs){
+                        if (trip==DeletedIDs[i].tripId){
+                                tickets[ticket_id]={"id":ticket_id+1,
+                                                    "passengerName":name,
+                                                    "tripId":trip,
+                                                    "seatNumber":1,
+                                                    "price":trips[i].price,
+                                                    "place":DeletedIDs[i].place,
+                               }        
+                                 trips[i].availableSeats--
+                                console.log("===================TICKET SERSI VALIDIE=================")
+                            console.log(
+                    `
+                    | TICKET #${tickets[ticket_id].id}                                 
+                    | Passenger Name : ${tickets[ticket_id].passengerName}                  
+                    | Seat Number    : ${tickets[ticket_id].seatNumber}       
+                    | Price          : ${tickets[ticket_id].price}      
+                    | tripID         : ${tickets[ticket_id].tripId}            
+                    | Depart         : ${trips[i].departure}
+                    | Destination    : ${trips[i].destination}
+                    | Place          : ${tickets[ticket_id].place}
+        
+                     ______________________________________________________________`)
+        
+                      DeletedIDs.splice(i,1)
+                    index-- // ${trips[tickets[DisponsibleIDs[0]].tripId].destination}
+                    chiffre_affaire+=tickets[ticket_id].price
+                    ticket_id++
+                    TicketNumber++
+                    break
                 }
             }
-                else{
+        }
+    }
+        else    {
+                    console.log('No aviable Places')
 
                 }
           
@@ -102,14 +196,15 @@ ______________________________________________________________`)
            
         }
         
-        }else{
+        }
+        else
+            {
             return console.log('insert valid id ...')
         }
         
         
 },
 AfficherTicket:function(){
-    console.log(DisponsibleIDs)
     console.log(`================================TICKET TABLE================================`)
     for (i in tickets){
         console.log(`
@@ -135,10 +230,12 @@ Annule:function(){
             if (TicketID==tickets[i].id){
                 console.log(`===========Le billet a été supprimé avec succès=============`)
                 trips[tickets[i].tripId-1].availableSeats++
-                delete tickets[i];
-                DisponsibleIDs[index]=TicketID
+                DeletedIDs[index]=tickets[i]
+                chiffre_affaire-=tickets[i].price
+                delete tickets[i]
                 isFound = true;
                 index++;
+                TicketNumber--
                 break;
             }
             else {
@@ -286,12 +383,40 @@ Recherche:function(){
         }
         }
     
+    },
+    Static:function(){
+        let VilleTicket = {}
+        function Calc(){
+            let temps = []
+            let tmp = 0;
+            for (i in trips){
+                temps[i]={"TicketsVendu":trips[i].availableSeats-50,"ville":trips[i].departure}
+            }
+            for (let i=0;i<temps.length;i++){
+                for(let j=0;j<temps.length-1;j++){
+                    if (temps[j].TicketsVendu<temps[j+1]){
+                        tmp = temps[j]
+                        temps[j]=temps[j+1]
+                        temps[j+1]=tmp
+                    }
+                }
+            }
+            
+        }
+
+
+        
+        console.log('=========================================================')
+        console.log('========          STATISTIQUE                ============')
+        console.log(`|
+| Chiffre D'Affaire : ${chiffre_affaire}
+| Ticket Vendu      : ${TicketNumber}
+| Le Mielluer Ville : ${temps.ville} | Tickets ${temps.availableSeats}
+| 
+`)
     }
 }
-const Statistique = {
-    
 
-}
 
         
      
@@ -325,6 +450,7 @@ console.log(`
 0. Quitter                                                                     =
 ================================================================================`)
 while (start){
+console.log(DeletedIDs)
 let choice = prompt('Vote Choix : ')
 console.log(ticket_id)
 switch(choice){
@@ -342,17 +468,17 @@ switch(choice){
             Manage.AfficherTicket();
             break;
     case "4":
-        Manage.Annule();
-        break;
+            Manage.Annule();
+            break;
     case "5":
-        Manage.Recherche();
-        break;
+            Manage.Recherche();
+            break;
     case "6":
-        Manage.filter();
-        break;
+            Manage.filter();
+            break;
     case "7":
-        Manage.Trier();
-        break;
+            Manage.Trier();
+            break;
     case "8":
         console.log("=====================================")
         console.log("= RAILWAY MANAGER V1                =")
@@ -368,11 +494,12 @@ switch(choice){
 8. Assiste moi 
 0. Quitter`)
     break;
+    case "9":
+        Manage.Static()
     default:
         console.log('insert un valid choice ...')
         break;
         }}
-
 
 
 
