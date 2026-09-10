@@ -201,3 +201,83 @@ export const places = [
 {"TripID":18,"place":0},
 {"TripID":19,"place":0},
 {"TripID":20,"place":0}]
+export const tickets = [{
+    "id": 1,
+    "passengerName": "Youssef Alami",
+    "tripId": 3,
+    "seatNumber": 1,
+    "price": 140,
+    "place": 1
+  },
+  {
+    "id": 2,
+    "passengerName": "Fatima Zahra",
+    "tripId": 12,
+    "seatNumber": 1,
+    "price": 85,
+    "place": 1
+  },
+  {
+    "id": 3,
+    "passengerName": "Mehdi Benjelloun",
+    "tripId": 7,
+    "seatNumber": 1,
+    "price": 150,
+    "place": 1
+  },
+  {
+    "id": 4,
+    "passengerName": "Amina Tazi",
+    "tripId": 2,
+    "seatNumber": 1,
+    "price": 90,
+    "place": 1
+  },
+  {
+    "id": 5,
+    "passengerName": "Hamza El Fassi",
+    "tripId": 18,
+    "seatNumber": 1,
+    "price": 60,
+    "place": 1
+  },
+  {
+    "id": 6,
+    "passengerName": "Khadija Chraibi",
+    "tripId": 5,
+    "seatNumber": 1,
+    "price": 110,
+    "place": 1
+  },
+  {
+    "id": 7,
+    "passengerName": "Omar Kettani",
+    "tripId": 10,
+    "seatNumber": 1,
+    "price": 30,
+    "place": 1
+  },
+  {
+    "id": 8,
+    "passengerName": "Salma Bennani",
+    "tripId": 15,
+    "seatNumber": 1,
+    "price": 80,
+    "place": 1
+  },
+  {
+    "id": 9,
+    "passengerName": "Anas Berrada",
+    "tripId": 1,
+    "seatNumber": 1,
+    "price": 25,
+    "place": 1
+  },
+  {
+    "id": 10,
+    "passengerName": "Zineb Idrissi",
+    "tripId": 19,
+    "seatNumber": 1,
+    "price": 100,
+    "place": 1
+  }];
