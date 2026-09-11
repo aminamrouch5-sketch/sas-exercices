@@ -65,8 +65,8 @@ const Manage = {
                     | Seat Number    : ${tickets[ticket_id].seatNumber}       
                     | Price          : ${tickets[ticket_id].price}      
                     | tripID         : ${tickets[ticket_id].tripId}            
-                    | Depart         : ${trips[tickets[ticket_id].tripId].departure}
-                    | DepartureTime  : ${trips[tickets[ticket_id].tripId].destination}
+                    | Depart         : ${trips[tickets[ticket_id].tripId-1].departure}
+                    | DepartureTime  : ${trips[tickets[ticket_id].tripId-1].destination}
                     |  Place         : ${tickets[ticket_id].place}
 
 ______________________________________________________________`)
@@ -93,6 +93,7 @@ ______________________________________________________________`)
             if (trip==trips[i].id){
                 if(trips[i].availableSeats>0){
                     if(DeletedIDs.length>0){
+                        let isFound = false;
                         for (i in DeletedIDs){
                         if (trip==DeletedIDs[i].tripId){
                                 tickets[ticket_id]={"id":ticket_id+1,
@@ -122,10 +123,14 @@ ______________________________________________________________`)
                     chiffre_affaire+=tickets[ticket_id].price
                     ticket_id++
                     TicketNumber++
+                    isFound=true;
                     break
                 }
             }
-                            // => If The Loops Dosent trip.id is not equal of any deleted ids list it will Lunch the Function AddNew()
+                if (!isFound){
+                    AddNew();
+                    return;
+                }    // => If The Loops Dosent trip.id is not equal of any deleted ids list it will Lunch the Function AddNew()
         }
         else{
             AddNew()      // =>  If The DeletedLists Length is Less then 1 it will auto function AddNew
@@ -157,8 +162,8 @@ AfficherTicket:function(){
     |  Seat Number    : ${tickets[i].seatNumber}
     |  Trip ID        : ${tickets[i].tripId }
     |  Price          : ${tickets[i].price}
-    |  Depart         : ${trips[tickets[i].tripId].departure}
-    |  Destination    : ${trips[tickets[i].tripId].destination}
+    |  Depart         : ${trips[tickets[i].tripId-1].departure}
+    |  Destination    : ${trips[tickets[i].tripId-1].destination}
     |  Place          : ${tickets[i].place}
     
        `)
@@ -218,8 +223,8 @@ Recherche:function(){
     |  Seat Number    : ${tickets[i].seatNumber}
     |  Trip ID        : ${tickets[i].tripId }
     |  Price          : ${tickets[i].price}
-    |  Depart         : ${trips[tickets[i].tripId].departure}
-    |  Destination    : ${trips[tickets[i].tripId].destination}
+    |  Depart         : ${trips[tickets[i].tripId-1].departure}
+    |  Destination    : ${trips[tickets[i].tripId-1].destination}
     |  Place          : ${tickets[i].place}
     
        `)
